@@ -1,6 +1,8 @@
 package com.boarolielias.banco.app;
 
 import com.boarolielias.banco.modelo.*;
+import com.boarolielias.banco.modelo.atm.CaixaEletronico;
+import com.boarolielias.banco.modelo.pagamento.DocumentoPagavel;
 
 public class Principal {
     public static void main(String[] args) {
@@ -37,6 +39,8 @@ public class Principal {
         suaConta.depositar(15_000);
         suaConta.sacar(15_500);
         suaConta.debitarTarifaMensal();
+
+        //caixaEletronico.pagar(, minhaConta); // para ter uma instancia da interface, precisamos ter uma classe concreta que implemente esse contrato.
 
         caixaEletronico.imprimirSaldo(minhaConta);
         System.out.println("--");
