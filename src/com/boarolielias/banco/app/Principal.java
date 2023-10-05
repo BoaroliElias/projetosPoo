@@ -2,7 +2,11 @@ package com.boarolielias.banco.app;
 
 import com.boarolielias.banco.modelo.*;
 import com.boarolielias.banco.modelo.atm.CaixaEletronico;
+import com.boarolielias.banco.modelo.pagamento.Boleto;
 import com.boarolielias.banco.modelo.pagamento.DocumentoPagavel;
+import com.boarolielias.banco.modelo.pagamento.Holerite;
+
+import java.sql.SQLOutput;
 
 public class Principal {
     public static void main(String[] args) {
@@ -31,16 +35,31 @@ public class Principal {
 //        Conta conta = minhaConta;
 //        conta.debitarTarifaMensal();
 
-        minhaConta.depositar(15_000);
+        minhaConta.depositar(30_000);
         minhaConta.sacar(1_000);
-        minhaConta.creditarRendimentos(0.8);
-        minhaConta.debitarTarifaMensal();
+        // minhaConta.creditarRendimentos(0.8);
+        // minhaConta.debitarTarifaMensal();
 
         suaConta.depositar(15_000);
         suaConta.sacar(15_500);
         suaConta.debitarTarifaMensal();
 
         //caixaEletronico.pagar(, minhaConta); // para ter uma instancia da interface, precisamos ter uma classe concreta que implemente esse contrato.
+
+        Boleto boletoEscola = new Boleto(titular2,800);
+        Holerite salarioFuncionario = new Holerite(titular2, 100, 160);
+
+        caixaEletronico.pagar(boletoEscola,minhaConta);
+        caixaEletronico.pagar(salarioFuncionario,minhaConta);
+
+        caixaEletronico.estornarPagamento(boletoEscola, minhaConta);
+
+        boletoEscola.imprimirRecibo();
+        salarioFuncionario.imprimirRecibo();
+
+//        System.out.println("Boleto pago: " + boletoEscola.estaPago());
+//        System.out.println("Salario pago: " + salarioFuncionario.estaPago());
+//
 
         caixaEletronico.imprimirSaldo(minhaConta);
         System.out.println("--");

@@ -1,6 +1,7 @@
 package com.boarolielias.banco.modelo.atm;
 
 import com.boarolielias.banco.modelo.Conta;
+import com.boarolielias.banco.modelo.pagamento.DocumentoEstornavel;
 import com.boarolielias.banco.modelo.pagamento.DocumentoPagavel;
 
 public class CaixaEletronico {
@@ -19,6 +20,15 @@ public class CaixaEletronico {
         }
         conta.sacar(documento.getValorTotal());
         documento.quitarPagamento();
+
+    }
+
+    public void estornarPagamento(DocumentoEstornavel documento, Conta conta){
+        if (!documento.estaPago()){
+            throw new IllegalArgumentException("Documento ainda não foi pago. Não é possível estornar.");
+        }
+        conta.depositar(documento.getValorTotal());
+        documento.estornarPagamento();
 
     }
 
