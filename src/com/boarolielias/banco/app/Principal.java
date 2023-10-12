@@ -2,6 +2,7 @@ package com.boarolielias.banco.app;
 
 import com.boarolielias.banco.modelo.*;
 import com.boarolielias.banco.modelo.atm.CaixaEletronico;
+import com.boarolielias.banco.modelo.excecao.SaldoInsuficienteException;
 import com.boarolielias.banco.modelo.pagamento.Boleto;
 import com.boarolielias.banco.modelo.pagamento.DocumentoPagavel;
 import com.boarolielias.banco.modelo.pagamento.Holerite;
@@ -35,27 +36,29 @@ public class Principal {
 //        Conta conta = minhaConta;
 //        conta.debitarTarifaMensal();
 
-        minhaConta.depositar(30_000);
-        minhaConta.sacar(1_000);
-        // minhaConta.creditarRendimentos(0.8);
-        // minhaConta.debitarTarifaMensal();
+        try{
+            minhaConta.depositar(30_000);
+            minhaConta.sacar(15_000);
 
-        suaConta.depositar(15_000);
-        suaConta.sacar(15_500);
-        suaConta.debitarTarifaMensal();
+            suaConta.depositar(15_000);
+            suaConta.sacar(15_500);
+            suaConta.debitarTarifaMensal();
 
-        //caixaEletronico.pagar(, minhaConta); // para ter uma instancia da interface, precisamos ter uma classe concreta que implemente esse contrato.
+            //caixaEletronico.pagar(, minhaConta); // para ter uma instancia da interface, precisamos ter uma classe concreta que implemente esse contrato.
+            Boleto boletoEscola = new Boleto(titular2,35000);
+            Holerite salarioFuncionario = new Holerite(titular2, 100, 160);
 
-        Boleto boletoEscola = new Boleto(titular2,800);
-        Holerite salarioFuncionario = new Holerite(titular2, 100, 160);
+            caixaEletronico.pagar(boletoEscola,minhaConta);
+            caixaEletronico.pagar(salarioFuncionario,minhaConta);
 
-        caixaEletronico.pagar(boletoEscola,minhaConta);
-        caixaEletronico.pagar(salarioFuncionario,minhaConta);
+            caixaEletronico.estornarPagamento(boletoEscola, minhaConta);
 
-        caixaEletronico.estornarPagamento(boletoEscola, minhaConta);
+            boletoEscola.imprimirRecibo();
+            salarioFuncionario.imprimirRecibo();
 
-        boletoEscola.imprimirRecibo();
-        salarioFuncionario.imprimirRecibo();
+        } catch (SaldoInsuficienteException e){
+            System.out.println("Erro ao executar operação na conta: " + e.getMessage());
+        }
 
 //        System.out.println("Boleto pago: " + boletoEscola.estaPago());
 //        System.out.println("Salario pago: " + salarioFuncionario.estaPago());
