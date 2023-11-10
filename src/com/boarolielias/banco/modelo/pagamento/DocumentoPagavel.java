@@ -1,5 +1,7 @@
 package com.boarolielias.banco.modelo.pagamento;
 
+import java.math.BigDecimal;
+
 public interface DocumentoPagavel {
 
     //aqui é o local onde estabelecemos um contrato, uma norma. Define quais comportamentos um documento pagavel deve ter
@@ -8,7 +10,7 @@ public interface DocumentoPagavel {
 
 
 
-    /*public abstract*/ double getValorTotal();
+    /*public abstract*/ BigDecimal getValorTotal();
     boolean estaPago();
     void quitarPagamento();
     default void imprimirRecibo(){

@@ -2,21 +2,23 @@ package com.boarolielias.banco.modelo.pagamento;
 
 import com.boarolielias.banco.modelo.Pessoa;
 
+import java.math.BigDecimal;
+
 public class Boleto implements DocumentoPagavel, DocumentoEstornavel {
 
 
     private Pessoa beneficiario;
-    private double valor;
+    private BigDecimal valor;
     private boolean pago;
 
 
-    public Boleto(Pessoa beneficiario, double valor) {
+    public Boleto(Pessoa beneficiario, BigDecimal valor) {
         this.beneficiario = beneficiario;
         this.valor = valor;
     }
 
     @Override
-    public double getValorTotal() {
+    public BigDecimal getValorTotal() {
         return valor;
     }
 

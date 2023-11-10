@@ -7,7 +7,9 @@ import com.boarolielias.banco.modelo.pagamento.Boleto;
 import com.boarolielias.banco.modelo.pagamento.DocumentoPagavel;
 import com.boarolielias.banco.modelo.pagamento.Holerite;
 
+import java.math.BigDecimal;
 import java.sql.SQLOutput;
+import java.time.LocalDateTime;
 
 public class Principal {
     public static void main(String[] args) {
@@ -15,7 +17,13 @@ public class Principal {
         Pessoa titular1 = new Pessoa();
         titular1.setNome("joao da silva");
         titular1.setDocumento("123456789");
+        titular1.setRendimentoAnual(new BigDecimal("15000"));
+        titular1.setTipo(TipoPessoa.JURIDICA);
 
+        titular1.setDtUltimaAtualizacao(LocalDateTime.parse("2023-11-09T13:20:00"));//precisamos passar uma instância LocalDateTime usando o Parse  vai converter uma string em um localdatetime
+        System.out.println(titular1.getDtUltimaAtualizacao());
+
+        BigDecimal rendimento = titular1.getRendimentoAnual();
 
         Pessoa titular2 = new Pessoa();
         titular2.setNome("maria abadia");
@@ -26,7 +34,7 @@ public class Principal {
 
 
         ContaInvestimento minhaConta = new ContaInvestimento(titular1, 123, 987); // atua no construtor com parâmetro
-        ContaEspecial suaConta = new ContaEspecial(titular2, 222, 333, 1000);
+        ContaEspecial suaConta = new ContaEspecial(titular2, 222, 333, new BigDecimal(1000));
 
         //Conta conta = new Conta(titular1, 123, 987); // instanciar uma conta do tipo conta apenas, nao deve ser possível no nosso negócio.
         // Para isso, a classe conta deve ser uma classe abstrata
@@ -37,16 +45,16 @@ public class Principal {
 //        conta.debitarTarifaMensal();
 
         try{
-            minhaConta.depositar(30_000);
-            minhaConta.sacar(15_000);
+            minhaConta.depositar(new BigDecimal(30000));
+            minhaConta.sacar(new BigDecimal(1000));
 
-            suaConta.depositar(15_000);
-            suaConta.sacar(15_500);
+            suaConta.depositar(new BigDecimal(15000));
+            suaConta.sacar(new BigDecimal(15500));
             suaConta.debitarTarifaMensal();
 
             //caixaEletronico.pagar(, minhaConta); // para ter uma instancia da interface, precisamos ter uma classe concreta que implemente esse contrato.
-            Boleto boletoEscola = new Boleto(titular2,35000);
-            Holerite salarioFuncionario = new Holerite(titular2, 100, 160);
+            Boleto boletoEscola = new Boleto(titular2,new BigDecimal(35000));
+            Holerite salarioFuncionario = new Holerite(titular2, new BigDecimal(100), 160);
 
             caixaEletronico.pagar(boletoEscola,minhaConta);
             caixaEletronico.pagar(salarioFuncionario,minhaConta);
