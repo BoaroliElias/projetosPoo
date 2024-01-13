@@ -11,6 +11,14 @@ public class Pessoa {
     private TipoPessoa tipo = TipoPessoa.FISICA;
     private LocalDateTime dtUltimaAtualizacao = LocalDateTime.now(); //essa atribuição pode ser aqui na declaração ou no construtor
 
+    public Pessoa(){
+
+    }
+
+    public Pessoa(String nome, String documento) {
+        this.nome = nome;
+        this.documento = documento;
+    }
 
     public String getNome() {
         return nome;
@@ -51,4 +59,15 @@ public class Pessoa {
     public void setRendimentoAnual(BigDecimal rendimentoAnual) {
         this.rendimentoAnual = rendimentoAnual;
     }
+
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "nome='" + nome + '\'' +
+                ", documento='" + documento + '\'' +
+                ", tipo=" + tipo +
+                '}';
+    }
+
 }

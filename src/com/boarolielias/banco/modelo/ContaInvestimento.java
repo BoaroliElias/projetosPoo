@@ -18,7 +18,7 @@ public class ContaInvestimento extends Conta{
     @Override
     public void debitarTarifaMensal() {
         if(getSaldo().compareTo(new BigDecimal("10000")) < 0){
-            sacar(new BigDecimal(30));
+            sacar(new BigDecimal("30"));
         }
     }
 

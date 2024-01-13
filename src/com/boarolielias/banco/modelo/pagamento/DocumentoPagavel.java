@@ -8,8 +8,6 @@ public interface DocumentoPagavel {
     // interfaces é um nível de abstração ainda maior que as classes abstratas. Elas foram criadas para não ter qualquer implementação nela
     // mas só pra definir um contrato.
 
-
-
     /*public abstract*/ BigDecimal getValorTotal();
     boolean estaPago();
     void quitarPagamento();

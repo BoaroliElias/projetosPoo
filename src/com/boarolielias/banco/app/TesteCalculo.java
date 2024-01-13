@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 public class TesteCalculo {
     public static void main(String[] args) {
 
+        //BigDecimal usado para dinheiro/moeda
+
         BigDecimal x = new BigDecimal("1.0");
 
         x = x.subtract(new BigDecimal("0.10"));
