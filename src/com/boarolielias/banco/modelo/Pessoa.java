@@ -2,6 +2,7 @@ package com.boarolielias.banco.modelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Pessoa {
 
@@ -70,4 +71,37 @@ public class Pessoa {
                 '}';
     }
 
+//    //gerando na mao equals e hashcode
+//    @Override
+//    public boolean equals(Object obj){
+//        if (this == obj) return true;
+//        if (obj == null) return false;
+//        if (getClass() != obj.getClass()) return false;
+//
+//        //como se fosse dessa forma: Pessoa pessoa = (Pessoa) obj;
+//        return documento.equals(((Pessoa) obj).documento);
+//        //prórpria IDE fez um cast
+//    }
+    //se vc quer comparar conteúdo, usa o .equals
+    // se vc quer comparar instância (endereço de memória) usa o operador ==
+
+
+//    @Override
+//    public int hashCode() {
+//        return ;
+//    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pessoa pessoa = (Pessoa) o;
+        return documento.equals(pessoa.documento);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(documento);
+    }
 }
